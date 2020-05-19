@@ -14,7 +14,7 @@ Implementation DropBlock in Tensorflow 2
 
 計算出 γ drop rate。(要與原始drop rate丟棄相同數量的點)。
 
-number of tensor * drop rate = γ * (block_size**2) * (feat_size**2)
+number of tensor * drop rate = γ * (block_size ** 2) * (feat_size ** 2)
 
 由此求出γ，再利用γ生成mask tensor
 
