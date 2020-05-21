@@ -55,7 +55,7 @@ class DropBlock(tf.keras.layers.Layer):
         return inputs
     
     def get_config(self):
-        config = super(DropBlockConv2D, self).get_config()
+        config = super(DropBlock, self).get_config()
         return config
 
     def build(self, input_shape):
