@@ -43,8 +43,8 @@ class DropBlock(tf.keras.layers.Layer):
             random_tensor = tf.random.uniform(shape=[b, self.m_h, self.m_w, self.c]) + self.bernoulli_rate
             binary_tensor = tf.floor(random_tensor)
             binary_tensor = tf.pad(binary_tensor, [[0,0],
-                                                   [self.m_h // 2, self.m_h // 2],
-                                                   [self.m_w // 2, self.m_h // 2],
+                                                   [self.block_size // 2, self.block_size // 2],
+                                                   [self.block_size // 2, self.block_size // 2],
                                                    [0, 0]])
             binary_tensor = tf.nn.max_pool(binary_tensor,
                                            [1, self.block_size, self.block_size, 1],
@@ -70,13 +70,13 @@ class DropBlock(tf.keras.layers.Layer):
 
 if __name__ == "__main__":
     import numpy as np
-    inputs = tf.keras.Input(shape=(5, 5, 3))
+    inputs = tf.keras.Input(shape=(50, 50, 3))
     x = DropBlock()(inputs)
 
     model = tf.keras.Model(inputs=inputs, outputs=x)
     model.summary()
 
-    test = np.ones([2,5,5,3], dtype=np.float32)
+    test = np.ones([2,50,50,3], dtype=np.float32)
 
     print('in test phase:\n')
     print(model.predict(test))
